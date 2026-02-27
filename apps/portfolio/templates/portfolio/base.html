@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{% block meta_description %}DJ Portfolio — Electronic music mixes, events, and bookings.{% endblock %}">
+  <title>{% block title %}DJ Portfolio{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav-container">
+      <a href="{% url 'portfolio:home' %}" class="nav-logo">DJ Portfolio</a>
+      <ul class="nav-links">
+        <li><a href="{% url 'portfolio:home' %}#mixes">Mixes</a></li>
+        <li><a href="{% url 'portfolio:home' %}#events">Events</a></li>
+        <li><a href="{% url 'portfolio:home' %}#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; {% now "Y" %} DJ Portfolio. All rights reserved.</p>
+  </footer>
+
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

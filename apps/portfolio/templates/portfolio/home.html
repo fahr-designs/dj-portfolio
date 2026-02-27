@@ -1,0 +1,87 @@
+{% extends "portfolio/base.html" %}
+{% load static %}
+
+{% block title %}DJ Portfolio — Music, Mixes & Events{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">Feel the Beat</h1>
+    <p class="hero-subtitle">Electronic music producer & DJ based worldwide</p>
+    <a href="#mixes" class="btn btn-primary">Listen Now</a>
+    <a href="#contact" class="btn btn-secondary">Book Me</a>
+  </div>
+</section>
+
+<!-- Featured Mixes Section -->
+<section id="mixes" class="section">
+  <div class="container">
+    <h2 class="section-title">Featured Mixes</h2>
+    {% if featured_mixes %}
+    <div class="mixes-grid">
+      {% for mix in featured_mixes %}
+      <article class="mix-card">
+        {% if mix.cover_image %}
+        <img src="{{ mix.cover_image.url }}" alt="{{ mix.title }}" class="mix-cover">
+        {% else %}
+        <div class="mix-cover mix-cover--placeholder"></div>
+        {% endif %}
+        <div class="mix-info">
+          <h3 class="mix-title">{{ mix.title }}</h3>
+          {% if mix.genre %}<span class="mix-genre">{{ mix.genre }}</span>{% endif %}
+          {% if mix.description %}<p class="mix-description">{{ mix.description|truncatewords:20 }}</p>{% endif %}
+          {% if mix.audio_url %}
+          <a href="{{ mix.audio_url }}" class="btn btn-sm" target="_blank" rel="noopener noreferrer">Listen</a>
+          {% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="empty-state">Mixes coming soon. Stay tuned!</p>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Upcoming Events Section -->
+<section id="events" class="section section--dark">
+  <div class="container">
+    <h2 class="section-title">Upcoming Events</h2>
+    {% if upcoming_events %}
+    <ul class="events-list">
+      {% for event in upcoming_events %}
+      <li class="event-item">
+        <div class="event-date">
+          <span class="event-day">{{ event.date|date:"d" }}</span>
+          <span class="event-month">{{ event.date|date:"M" }}</span>
+        </div>
+        <div class="event-details">
+          <h3 class="event-title">{{ event.title }}</h3>
+          <p class="event-venue">{{ event.venue }}, {{ event.city }}</p>
+          {% if event.description %}<p class="event-description">{{ event.description }}</p>{% endif %}
+        </div>
+        {% if event.ticket_url %}
+        <a href="{{ event.ticket_url }}" class="btn btn-sm btn-outline" target="_blank" rel="noopener noreferrer">Get Tickets</a>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="empty-state">No upcoming events scheduled. Check back soon!</p>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Contact / Booking Section -->
+<section id="contact" class="section">
+  <div class="container">
+    <h2 class="section-title">Book Me</h2>
+    <p class="contact-intro">Available for bookings worldwide — festivals, clubs, private events, and more.</p>
+    <div class="contact-details">
+      <p>For booking enquiries, reach out via email:</p>
+      <a href="mailto:booking@djportfolio.com" class="contact-email">booking@djportfolio.com</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

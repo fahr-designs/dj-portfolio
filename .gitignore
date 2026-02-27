@@ -155,8 +155,7 @@ db.sqlite3-journal
 # **/migrations/*.pyc
 # !**/migrations/__init__.py
 
-# Django static files
-/static/
+# Django static files (source files in /static/ are tracked; only collected output is ignored)
 /staticfiles/
 /static_root/
 /staticfiles_root/
@@ -283,7 +282,6 @@ $RECYCLE.BIN/
 *.heroku
 
 # Docker
-.dockerignore
 docker-compose.override.yml
 
 # Logs
